@@ -34,7 +34,7 @@ Acessar via prompt de comando na pasta raiz do local onde o sistema foi colocado
 
 	`$ php artisan migrate`
 	
-Acessar o tinker
+Acessar o Tinker
 
 	`$ php artisan tinker`
 
@@ -42,4 +42,9 @@ Digitar o comando para inserir o primeiro site de teste
 	 	
 	`App\Models\Sites::create(['name'=>'SEBRAE', 'urlsite'=>'http://www.sebrae.com.br', 'urlsearch'=>'http://www.sebrae.com.br/canaldofornecedor'])`
 
+Saia do Tinker digitando `exit`
 
+Execute a captura dos dados
+	
+	`$ php artisan sites:carregar-dados-licitacao`
+	
