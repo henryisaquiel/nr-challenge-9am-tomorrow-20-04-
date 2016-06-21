@@ -15,6 +15,10 @@ Este projeto encontra-se como está e não há previsão agendada de melhorias o
 ## Instalação
 
 Baixar o pacote através deste repositório.
+
+Executar o comando para atualizar as dependências através do composer
+
+	`composer update`
  
 Criar base de dados através de gerenciador.
 
