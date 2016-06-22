@@ -8,6 +8,7 @@ use PhpParser\Node\Stmt\Foreach_;
 use Malahierba\WebHarvester\WebHarvester;
 use Symfony\Component\HttpKernel\Client;
 use Symfony\Component\DomCrawler\Crawler;
+use App\Models\SitesDados;
 
 class CapturarDados extends Command
 {
@@ -83,14 +84,17 @@ class CapturarDados extends Command
         			$cl = new Crawler($content);
         			
 	        		$tables = $cl->filter('table#ContentPlaceHolder1_gdvResultado tr table div a')->each(function (Crawler $node, $i) {
-	        			$ret = array();
-	        				$ret['titulo'] = $node->filter('span')->text();
-		        		return $ret;
+        				return $ret = array(
+				        				'unidade'	=> $node->filter('span')->text(),
+				        				'titulo'	=> $node->filter('h3')->text(),
+				        				'objeto'	=> $node->filter('p')->text(),
+        							);
 	        		});
-	        		dd($tables);
-// 	        		foreach ($content as $nod){
-// 	        		}
 	        		
+	        		foreach ($tables as $table){
+	        			$table['idsite']	= $site->id;
+	        			SitesDados::firstOrCreate($table);
+	        		}
 	        	} else {
 	        		$this->info('Não foi possível resgatar os dados' . $webharvester->getStatusCode());
 	        	}
